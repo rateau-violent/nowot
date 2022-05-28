@@ -22,6 +22,9 @@ client.on("message", message => {
     if (message.content.toLowerCase().includes("wowo")) {
         message.react('🖕');
     }
+    if (message.content.toLowerCase().includes("ωoωo")) {
+       message.react('🖕');
+    }
 });
 
 client.login(token);
