@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 
 import { Client, Intents } from "discord.js";
+import { isWowo } from "./isWowo";
 
 dotenv.config();
 
@@ -18,12 +19,17 @@ client.once("ready", () => {
     console.log(`${client.user?.username} is ready`);
 });
 
-client.on("message", message => {
-    if (message.content.toLowerCase().includes("wowo")) {
+client.on("message", (message) => {
+    if (isWowo(message.content.toLowerCase())) {
         message.react('🖕');
     }
-    if (message.content.toLowerCase().includes("ωoωo")) {
-       message.react('🖕');
+});
+
+client.on('messageUpdate', (oldMessage, newMessage) => {
+    let content: string = newMessage!.content!.toLowerCase();
+
+    if (content != null && isWowo(content)) {
+        newMessage.react('🖕');
     }
 });
 
